@@ -1,3 +1,9 @@
+Install
+-------
+```bash
+sudo pip3 install cherrypy
+```
+
 Quick Tips
 ----------
 

@@ -4,24 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>CherryPy Control Panel</title>
+  <title>PiControl - raspberry-3b</title>
 
   <!-- Bootstrap core CSS -->
   <link href="static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="static/css/index.css" rel="stylesheet">
 </head>
 <body>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">PiControl</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <!--li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item">
@@ -34,22 +35,63 @@
             <a class="dropdown-item" href="#">Another action</a>
             <a class="dropdown-item" href="#">Something else here</a>
           </div>
-        </li>
+        </li-->
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
+      <a class="btn btn-outline-success my-2 my-sm-0 text-success">Login</a>
     </div>
   </nav>
 
-  <main role="main" class="container">
+  <main role="main" class="container main-content">
+    <div class="row">
 
-    <div class="starter-template">
-      <h1>Bootstrap starter template</h1>
-      <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-    </div>
+      <div class="col">
+        <div class="card">
+          <div class="card-header">Inputs</div>
+          <div class="card-body">
 
+						<ul class="list-group">
+							<li class="list-group-item align-items-center list-group-item-success">
+								Door Sensor
+								<span class="float-right">
+									<span class="badge badge-dark badge-pill">#10</span>
+									<span class="badge badge-success badge-pill">on</span>
+								</span>
+							</li>
+						</ul>
+
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col -->
+
+      <div class="col">
+        <div class="card">
+          <div class="card-header">Inputs</div>
+          <div class="card-body">
+
+						<ul class="list-group">
+							<li class="list-group-item align-items-center">
+								Speakers
+								<span class="float-right">
+									<span class="badge badge-danger badge-pill">Red Alert</span>
+									<span class="badge badge-info badge-pill">Subnautica Soundtrack</span>
+								</span>
+							</li>
+							<li class="list-group-item d-flex justify-content-between align-items-center">
+								Lights
+								<span class="float-right">
+									<span class="badge badge-light badge-pill">#11</span>
+									<span class="badge badge-light badge-pill">#12</span>
+									<span class="badge badge-light badge-pill">#13</span>
+									<span class="badge badge-pill text-white" style="background: #00dd99;">#00dd99</span>
+								</span>
+							</li>
+						</ul>
+
+          </div><!-- /.card-body -->
+        </div><!-- /.card -->
+      </div><!-- /.col -->
+
+    </div><!-- /.row -->
   </main><!-- /.container -->
 
   <!-- Bootstrap core JavaScript
