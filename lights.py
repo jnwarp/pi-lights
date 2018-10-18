@@ -3,8 +3,8 @@ import pigpio
 import time
 
 # define pins
-rgb1 = (0, 16, 21)
-rgb2 = (19, 13, 26)
+rgb1 = (20, 21, 16)
+rgb2 = (0, 0, 0)
 
 class LightStrip():
 	def __init__(self, pins = (20, 16, 21)):
@@ -141,5 +141,5 @@ if __name__ == "__main__":
 	strip1 = LightStrip(rgb1)
 	strip2 = LightStrip(rgb2)
 
-	fadeColors('black')
+	fadeColors('white')
 
