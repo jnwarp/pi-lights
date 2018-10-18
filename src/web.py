@@ -8,7 +8,7 @@ class ControlPanel(object):
 	""" Variables """
 	inputs = {
 		'door': {
-			'pin': 2,
+			'pin': 20,
 			'state': 0,
 			'last_state': None,
 			'last_change': 0
@@ -34,8 +34,12 @@ class ControlPanel(object):
 				pin = self.inputs[sensor]['pin']
 				self.inputs[sensor]['state'] = self.pi.read(pin)
 				if self.inputs[sensor]['state'] != self.inputs[sensor]['last_state']:
-					if sensor == 'door' and self.inputs[sensor]['last_state'] == 1 and time.time()-self.inputs[sensor]['last_change'] > (60*10):
-						os.system('mpg321 /home/james/pi-lights/AI_welcome.mp3')
+					if sensor == 'door':
+						if self.inputs[sensor]['last_state'] == 1:
+							os.system('aplay /home/james/pi-lights/src/sounds/keypad_door_open.wav')
+						else:
+							time.sleep(.4)
+							os.system('aplay /home/james/pi-lights/src/sounds/keypad_door_clank.wav')
 					self.inputs[sensor]['last_state'] = self.inputs[sensor]['state']
 					self.inputs[sensor]['last_change'] = time.time()
 
@@ -59,7 +63,9 @@ class ControlPanel(object):
 
 			print(sensor, pin)
 
-			self.pi.set_mode(pin, pigpio.PUD_DOWN)
+			self.pi.set_mode(pin, pigpio.INPUT)
+			self.pi.set_pull_up_down(pin, pigpio.PUD_DOWN)
+		self.pi.set_mode(21, pigpio.OUTPUT)
 	
 	def startServer(self, port=8080):
 		conf = {
