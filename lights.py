@@ -1,6 +1,7 @@
 from os import system
 import pigpio
 import time
+import datetime
 
 # define pins
 rgb1 = (20, 21, 16)
@@ -51,10 +52,10 @@ class LightStrip():
 			level = int(rgb[i] * (brightness / 255))
 			self.pi.set_PWM_dutycycle(self.pins[i], level)
 
-		# save the current color
-		rgbNow = list(rgb)
-		rgbNow.append(brightness)
-		self.currentColor = tuple(rgbNow)
+		# save the current color rgbNow = list(rgb) rgbNow.append(brightness)
+		rgb = list(rgb)
+		rgb.append(brightness)
+		self.currentColor = tuple(rgb)
 	
 	def fadeColor(self, color = 'white', brightness = 255):
 		# get the rgb color value ex (255, 255, 0)
@@ -141,5 +142,53 @@ if __name__ == "__main__":
 	strip1 = LightStrip(rgb1)
 	strip2 = LightStrip(rgb2)
 
-	fadeColors('white')
+	while True:
+		fadeColors((255, 0, 0))
+		time.sleep(2)
+		fadeColors((0, 255, 0))
+		time.sleep(30)
+		fadeColors((0, 0, 255))
+		time.sleep(2)
+		fadeColors('white')
+		time.sleep(5)
+		fadeColors('black')
+		time.sleep(2)
 
+	"""
+	# test colors
+	fadeColors('red')
+	time.sleep(2)
+	fadeColors('green')
+	time.sleep(2)
+	fadeColors('blue')
+	time.sleep(2)
+	fadeColors('white')
+	time.sleep(5)
+
+	redAlert()
+	portalWakeUp()
+
+	last_color = 'white'
+
+	while True:
+		now_time = datetime.datetime.now().time()
+		if now_time >= datetime.time(7,5) and now_time < datetime.time(20,0):
+			if last_color != 'seagreen':
+				fadeColors('seagreen')
+				last_color = 'seagreen'
+
+		if now_time >= datetime.time(20,0) and now_time < datetime.time(22,50):
+			if last_color != 'dorange':
+				fadeColors('dorange')
+				last_color = 'dorange'
+
+		if now_time >= datetime.time(22,50) and now_time < datetime.time(23,0):
+			if last_color != 'red':
+				fadeColors('red')
+				last_color = 'red'
+
+		if now_time >= datetime.time(23,0) and now_time < datetime.time(23,10):
+			if last_color != 'black':
+				fadeColors('black')
+				last_color = 'black'
+	"""
