@@ -8,7 +8,25 @@ class ControlPanel(object):
 	""" Variables """
 	inputs = {
 		'door': {
+			'name': 'door_sensor',
 			'pin': 20,
+			'state': 0,
+			'last_state': None,
+			'last_change': 0
+		},
+		'motion': {
+			'name': 'motion_sensor',
+			'pin': 4,
+			'state': 0,
+			'last_state': None,
+			'last_change': 0
+		}
+	}
+
+	outputs = {
+		'motion_led': {
+			'name': 'motion_led',
+			'pin': 17,
 			'state': 0,
 			'last_state': None,
 			'last_change': 0
@@ -30,18 +48,35 @@ class ControlPanel(object):
 	def backgroundLoop(self):
 		while True:
 			time.sleep(0.1)
-			for sensor in self.inputs:
-				pin = self.inputs[sensor]['pin']
-				self.inputs[sensor]['state'] = self.pi.read(pin)
-				if self.inputs[sensor]['state'] != self.inputs[sensor]['last_state']:
-					if sensor == 'door':
-						if self.inputs[sensor]['last_state'] == 1:
-							os.system('aplay /home/james/pi-lights/src/sounds/keypad_door_open.wav')
+			for item in self.inputs:
+				sensor = self.inputs[item]
+				sensor['state'] = self.pi.read(sensor['pin'])
+
+				if sensor['state'] != sensor['last_state']:
+					if sensor['name'] == 'door_sensor':
+						if sensor['last_state'] == 1:
+							motion = self.inputs['motion']
+							delay = time.time() - motion['last_change']
+							print(motion)
+							print(delay)
+							if delay > 20 or (delay < 1 and motion['state'] == 1):
+								print('Welcome back')
+							else:
+								print('Goodbye')
+							os.system('aplay /home/james/pi-lights/src/sounds/keypad_door_open.wav &')
 						else:
 							time.sleep(.4)
-							os.system('aplay /home/james/pi-lights/src/sounds/keypad_door_clank.wav')
-					self.inputs[sensor]['last_state'] = self.inputs[sensor]['state']
-					self.inputs[sensor]['last_change'] = time.time()
+							#os.system('aplay /home/james/pi-lights/src/sounds/keypad_door_clank.wav &')
+
+					if sensor['name'] == 'motion_sensor':
+						self.outputs['motion_led']['state'] = sensor['state']
+
+					sensor['last_state'] = sensor['state']
+					sensor['last_change'] = time.time()
+
+			for item in self.outputs:
+				output = self.outputs[item]
+				self.pi.write(output['pin'], output['state'])
 
 		return
 	
@@ -58,14 +93,19 @@ class ControlPanel(object):
 		return f.read()
 	
 	def setupInputPins(self):
-		for sensor in self.inputs:
-			pin = self.inputs[sensor]['pin']
+		for item in self.inputs:
+			sensor = self.inputs[item]
 
-			print(sensor, pin)
+			print('Input ' + sensor['name'], sensor['pin'])
 
-			self.pi.set_mode(pin, pigpio.INPUT)
-			self.pi.set_pull_up_down(pin, pigpio.PUD_DOWN)
-		self.pi.set_mode(21, pigpio.OUTPUT)
+			self.pi.set_mode(sensor['pin'], pigpio.INPUT)
+			self.pi.set_pull_up_down(sensor['pin'], pigpio.PUD_DOWN)
+
+		for item in self.outputs:
+			output = self.outputs[item]
+
+			print('Output ' + output['name'], output['pin'])
+			self.pi.set_mode(output['pin'], pigpio.OUTPUT)
 	
 	def startServer(self, port=8080):
 		conf = {
