@@ -4,8 +4,8 @@ import time
 import datetime
 
 # define pins
-rgb1 = (20, 21, 16)
-rgb2 = (0, 0, 0)
+rgb1 = (20, 16, 21)
+rgb2 = (13, 26, 19)
 
 class LightStrip():
 	def __init__(self, pins = (20, 16, 21)):
@@ -144,15 +144,15 @@ if __name__ == "__main__":
 
 	while True:
 		fadeColors((255, 0, 0))
-		time.sleep(2)
+		time.sleep(5)
 		fadeColors((0, 255, 0))
-		time.sleep(30)
+		time.sleep(5)
 		fadeColors((0, 0, 255))
-		time.sleep(2)
+		time.sleep(5)
 		fadeColors('white')
 		time.sleep(5)
 		fadeColors('black')
-		time.sleep(2)
+		time.sleep(5)
 
 	"""
 	# test colors
