@@ -1,11 +1,13 @@
 import argparse
 import lights
 
+rgb1 = (20, 16, 21)
+rgb2 = (13, 26, 19)
 
 def lights():
 
-    strip1 = lights.LightStrip(rgb1)
-    strip2 = lights.LightStrip(rgb2)
+    strip1 = LightStrip(rgb1)
+    strip2 = LightStrip(rgb2)
 
 
 if __name__ == "__main__":
@@ -21,7 +23,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if (args.piPlatform == 'lights'):
-
+        strip1 = lights.LightStrip(rgb1)
+        strip2 = lights.LightStrip(rgb2)
         while True:
             strip1.setColor('orange')
             strip2.setColor('orange')
