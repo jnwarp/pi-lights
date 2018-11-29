@@ -6,9 +6,6 @@ def lights():
     strip1 = LightStrip(rgb1)
     strip2 = LightStrip(rgb2)
 
-    while True:
-        strip1.setColor('orange')
-        strip2.setColor('orange')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Choose the Pi')
@@ -23,4 +20,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if (args.piPlatform == 'lights'):
-        lights()
+        while True:
+            strip1.setColor('orange')
+            strip2.setColor('orange')
