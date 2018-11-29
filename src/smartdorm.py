@@ -1,5 +1,5 @@
 import argparse
-import lights.py
+import lights
 
 def lights():
 
@@ -20,6 +20,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if (args.piPlatform == 'lights'):
+        strip1 = LightStrip(rgb1)
+        strip2 = LightStrip(rgb2)
         while True:
             strip1.setColor('orange')
             strip2.setColor('orange')
