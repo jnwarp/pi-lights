@@ -1,6 +1,7 @@
 import argparse
 import lights
 import time
+import web
 
 def runLights():
 	rgb1 = (20, 16, 21)
@@ -22,7 +23,7 @@ def runLights():
 	strip2.fadeColor('blue')
 
 def runDoor():
-	cp = ControlPanel()
+	cp = web.ControlPanel()
 	cp.startServer()
 
 if __name__ == "__main__":

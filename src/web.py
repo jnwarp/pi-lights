@@ -12,18 +12,15 @@ class ControlPanel(object):
 	def __init__(self):
 		self.path = '.'
 
-		# setup input/output pins
-		self.setupInputPins()
-
 		# setup network
 		cmd = commandSend.CommandSend(
-			token,
+			self.token,
 			url="http://172.16.16.61:8080/"
 		)
 
 	@cherrypy.expose
 	def commandReceive(self, command, key):
-		if key != token:
+		if key != self.token:
 			print('Error: bad key given')
 
 		print('Command: ' + command)

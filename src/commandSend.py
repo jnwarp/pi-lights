@@ -1,5 +1,4 @@
 from requests import Session
-from requests_toolbelt import MultipartEncoder
 
 class CommandSend():
 	def __init__(self, token, url='https://localhost/', verify=False):
