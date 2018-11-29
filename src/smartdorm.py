@@ -21,6 +21,10 @@ def runLights():
     time.sleep(1)
     strip2.fadeColor('blue')
 
+def runDoor():
+    cp = ControlPanel()
+	cp.startServer()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Choose the Pi')
 
@@ -33,5 +37,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if (args.piPlatform == 'lights'):
+    if args.piPlatform == 'lights':
         runLights()
+    if args.piPlatform == 'door':
+        runDoor()

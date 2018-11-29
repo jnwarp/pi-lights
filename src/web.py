@@ -21,12 +21,14 @@ class ControlPanel(object):
 			url="http://172.16.16.61:8080/"
 		)
 
+	@cherrypy.expose
 	def commandReceive(self, command, key):
 		if key != token:
 			print('Error: bad key given')
 
 		print('Command: ' + command)
 
+	@cherrypy.expose
 	def commandSend(self, command):
 		print('Sending command: ' + command)
 		cmd.send('test')
