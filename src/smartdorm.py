@@ -1,6 +1,15 @@
 import argparse
 import lights.py
 
+def lights():
+
+    strip1 = LightStrip(rgb1)
+    strip2 = LightStrip(rgb2)
+
+    while True:
+        strip1.setColor('orange')
+        strip2.setColor('orange')
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Choose the Pi')
 
@@ -12,14 +21,6 @@ if __name__ == "__main__":
         help='runs the "lights" Raspberry Pi')
 
     args = parser.parse_args()
-    print(args.piPlatform)
 
-
-def lights:
-    if(--lights):
-        strip1 = LightStrip(rgb1)
-        strip2 = LightStrip(rgb2)
-
-        while True:
-            strip1.setColor('orange')
-            strip2.setColor('orange')
+    if (args.piPlatform == 'lights'):
+        lights()
