@@ -10,8 +10,12 @@ def runLights():
     strip2 = lights.LightStrip(rgb2)
 
     strip1.fadeColor('red')
-    time.sleep(1)
+    strip1.fadeColor('green')
     strip1.fadeColor('blue')
+
+    strip2.fadeColor('red')
+    strip2.fadeColor('green')
+    strip2.fadeColor('blue')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Choose the Pi')

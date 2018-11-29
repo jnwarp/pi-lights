@@ -15,8 +15,8 @@ class LightStrip():
 		# define colors
 		colors = {}
 		colors['red']		= (255, 0, 0)
-		colors['green']		= (0, 255, 30)
-		colors['blue']		= (0, 130, 255)
+		colors['green']		= (0, 255, 0)
+		colors['blue']		= (0, 0, 255)
 		colors['white']		= (255, 255, 255)
 
 		colors['black'] 	= (0, 0, 0)
@@ -35,7 +35,7 @@ class LightStrip():
 		self.pins = pins
 		self.currentColor = (255, 255, 255, 0)
 		self.setColor((255, 255, 255))
-	
+
 	def setColor(self, color = 'white', brightness = 255):
 		# get the rgb color value ex (255, 255, 0)
 		if type(color) == str:
@@ -56,7 +56,7 @@ class LightStrip():
 		rgb = list(rgb)
 		rgb.append(brightness)
 		self.currentColor = tuple(rgb)
-	
+
 	def fadeColor(self, color = 'white', brightness = 255):
 		# get the rgb color value ex (255, 255, 0)
 		if type(color) == str:
@@ -98,14 +98,14 @@ def redAlert():
 	time.sleep(0.5)
 	for i in range(5):
 		print('beep')
-		strip1.setColor('orange') 
-		strip2.setColor('orange') 
+		strip1.setColor('orange')
+		strip2.setColor('orange')
 		time.sleep(1)
 		print('boop')
-		strip2.setColor('dorange') 
+		strip2.setColor('dorange')
 		time.sleep(.5)
 		print('boop')
-		strip1.setColor('dorange') 
+		strip1.setColor('dorange')
 		time.sleep(.4)
 
 def fadeColors(color):
@@ -136,7 +136,7 @@ def portalWakeUp():
 
 	time.sleep(70)
 	fadeColors('seagreen')
-	
+
 
 if __name__ == "__main__":
 	strip1 = LightStrip(rgb1)
