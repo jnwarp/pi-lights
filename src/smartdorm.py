@@ -1,14 +1,17 @@
 import argparse
 import lights
+import time
 
-rgb1 = (20, 16, 21)
-rgb2 = (13, 26, 19)
+def runLights():
+    rgb1 = (20, 16, 21)
+    rgb2 = (13, 26, 19)
 
-def lights():
+    strip1 = lights.LightStrip(rgb1)
+    strip2 = lights.LightStrip(rgb2)
 
-    strip1 = LightStrip(rgb1)
-    strip2 = LightStrip(rgb2)
-
+    strip1.fadeColor('red')
+    time.sleep(1)
+    strip1.fadeColor('blue')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Choose the Pi')
@@ -23,8 +26,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if (args.piPlatform == 'lights'):
-        strip1 = lights.LightStrip(rgb1)
-        strip2 = lights.LightStrip(rgb2)
-        while True:
-            strip1.setColor('orange')
-            strip2.setColor('orange')
+        runLights()
