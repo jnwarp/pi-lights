@@ -21,8 +21,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if (args.piPlatform == 'lights'):
-        strip1 = lights.LightStrip(rgb1)
-        strip2 = lights.LightStrip(rgb2)
+
         while True:
             strip1.setColor('orange')
             strip2.setColor('orange')
