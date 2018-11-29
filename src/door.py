@@ -1,15 +1,26 @@
-import RPi.GPIO as GPIO  
-from time import sleep     # this lets us have a time delay (see line 15)  
-GPIO.setmode(GPIO.BCM)     # set up BCM GPIO numbering  
-GPIO.setup(4, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    # set GPIO25 as input (button)  
-GPIO.setup(17, GPIO.OUT)   # set GPIO24 as an output (LED)  
-GPIO.output(17, True)
-  
-try:  
-    while True:            # this will carry on until you hit CTRL+C  
-        print(GPIO.input(4))
-        sleep(0.1)         # wait 0.1 seconds  
-        GPIO.output(17, GPIO.input(4))
-  
-finally:                   # this block will run no matter how the try block exits  
-    GPIO.cleanup()         # clean up after yourself 
+import pigpio
+import time
+
+
+# set pins
+default_pins = {
+    'motion': 3, #read data
+    'motion_led': 4, #output high
+    'door_in': 20, #read data
+    'door_out': 21, #output high power
+}
+
+class DoorControl():
+    def __init__(self, pins = default_pins):
+        # initialize pigpio
+        self.pi = pigpio.pi()
+        self.pins = pins
+
+    def setupPins(self):
+        self.pi.set_mode(sensor[3], pigpio.INPUT)
+        self.pi.set_pull_up_down(sensor[3], pigpio.PUD_DOWN)
+        self.pi.set_mode(output[4], pigpio.OUTPUT)
+
+        self.pi.set_mode(sensor[20], pigpio.INPUT)
+        self.pi.set_pull_up_down(sensor[20], pigpio.PUD_DOWN)
+        self.pi.set_mode(output[21], pigpio.OUTPUT)
