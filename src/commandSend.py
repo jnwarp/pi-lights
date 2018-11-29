@@ -7,14 +7,11 @@ class CommandSend():
 		self.session = Session()
 		self.token = token
 
-		# get cookie headers
-		self.session.head(self.url, verify=self.verify)
-
 	def send(self, command, data={}):
 		response = self.session.post(
 			url = self.url + 'commandReceive',
 			params = {
-				'token': self.token,
+				'key': self.token,
 				'command': command
 			},
 			data = data,

@@ -13,7 +13,7 @@ class ControlPanel(object):
 		self.path = '.'
 
 		# setup network
-		cmd = commandSend.CommandSend(
+		self.cmd = commandSend.CommandSend(
 			self.token,
 			url="http://172.16.16.61:8080/"
 		)
@@ -28,7 +28,7 @@ class ControlPanel(object):
 	@cherrypy.expose
 	def commandSend(self, command):
 		print('Sending command: ' + command)
-		cmd.send('test')
+		self.cmd.send('test')
 
 	@cherrypy.expose
 	def index(self):
