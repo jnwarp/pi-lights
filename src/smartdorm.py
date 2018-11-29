@@ -10,11 +10,15 @@ def runLights():
     strip2 = lights.LightStrip(rgb2)
 
     strip1.fadeColor('red')
+    time.sleep(1)
     strip1.fadeColor('green')
+    time.sleep(1)
     strip1.fadeColor('blue')
 
     strip2.fadeColor('red')
+    time.sleep(1)
     strip2.fadeColor('green')
+    time.sleep(1)
     strip2.fadeColor('blue')
 
 if __name__ == "__main__":
