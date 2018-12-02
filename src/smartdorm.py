@@ -3,24 +3,20 @@ import lights
 import time
 import web
 
+rgb1 = (20, 16, 21)
+rgb2 = (13, 26, 19)
+
+strip1 = lights.LightStrip(rgb1)
+strip2 = lights.LightStrip(rgb2)
+
+def setColor(color):
+	strip1.fadeColor(color)
+	strip2.fadeColor(color)
+
 def runLights():
-	rgb1 = (20, 16, 21)
-	rgb2 = (13, 26, 19)
-
-	strip1 = lights.LightStrip(rgb1)
-	strip2 = lights.LightStrip(rgb2)
-
-	strip1.fadeColor('red')
-	time.sleep(1)
-	strip1.fadeColor('green')
-	time.sleep(1)
-	strip1.fadeColor('blue')
-
-	strip2.fadeColor('red')
-	time.sleep(1)
-	strip2.fadeColor('green')
-	time.sleep(1)
-	strip2.fadeColor('blue')
+	cp = web.ControlPanel()
+	cp.startServer()
+	cp.commandAdd('setColor', setColor)
 
 def runDoor():
 	cp = web.ControlPanel()
