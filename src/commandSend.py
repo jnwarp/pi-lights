@@ -7,14 +7,14 @@ class CommandSend():
 		self.session = Session()
 		self.token = token
 
-	def send(self, command, data={}):
+	def send(self, command, data=''):
 		response = self.session.post(
 			url = self.url + 'commandReceive',
 			params = {
 				'key': self.token,
-				'command': command
+				'command': command,
+				'data': data
 			},
-			data = data,
 			verify = self.verify
 		)
 
