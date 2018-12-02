@@ -15,7 +15,6 @@ class CommandSend():
 				'command': command
 			},
 			data = data,
-			headers = header,
 			verify = self.verify
 		)
 

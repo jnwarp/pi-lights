@@ -28,7 +28,7 @@ class ControlPanel(object):
 	@cherrypy.expose
 	def commandSend(self, command):
 		print('Sending command: ' + command)
-		self.cmd.send('test')
+		self.cmd.send(command)
 
 	@cherrypy.expose
 	def index(self):
