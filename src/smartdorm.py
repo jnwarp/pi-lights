@@ -9,14 +9,14 @@ rgb2 = (13, 26, 19)
 strip1 = lights.LightStrip(rgb1)
 strip2 = lights.LightStrip(rgb2)
 
-def setColor(color):
+def fadeColors(color):
 	strip1.fadeColor(color)
 	strip2.fadeColor(color)
 
 def runLights():
 	cp = web.ControlPanel()
+	cp.commandAdd('fadeColors', fadeColors)
 	cp.startServer()
-	cp.commandAdd('setColor', setColor)
 
 def runDoor():
 	cp = web.ControlPanel()

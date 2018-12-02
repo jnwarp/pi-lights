@@ -10,6 +10,9 @@ class ControlPanel(object):
 	pi = pigpio.pi()
 	commands = {}
 
+	def test(self, data):
+		print('data:', data)
+
 	def __init__(self):
 		self.path = '.'
 
@@ -18,21 +21,27 @@ class ControlPanel(object):
 			self.token,
 			url="http://172.16.16.61:8080/"
 		)
+
+		# add test function
+		self.commandAdd('test', self.test)
+
 	
 	def commandAdd(self, command, function):
 		self.commands[command] = function
+		print(self.commands)
 
 	@cherrypy.expose
-	def commandReceive(self, key, command, data = {}):
+	def commandReceive(self, key, command, data = ''):
 		if key != self.token:
 			print('Error: bad key given')
 			return
 
 		print('Command: ' + command)
+		print('Available commands: ', self.commands)
 		self.commands[command](data)
 
 	@cherrypy.expose
-	def commandSend(self, command, data = {}):
+	def commandSend(self, command, data = ''):
 		print('Sending command: ' + command)
 		self.cmd.send(command, data)
 
