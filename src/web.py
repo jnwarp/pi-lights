@@ -36,13 +36,13 @@ class ControlPanel(object):
 			print('Error: bad key given')
 			return
 
-		print('Command: ' + command)
+		print('Command: ', command, data)
 		print('Available commands: ', self.commands)
 		self.commands[command](data)
 
 	@cherrypy.expose
 	def commandSend(self, command, data = ''):
-		print('Sending command: ' + command)
+		print('Sending command: ', command, data)
 		self.cmd.send(command, data)
 
 	@cherrypy.expose
