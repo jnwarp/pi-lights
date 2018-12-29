@@ -1,10 +1,11 @@
 from os import system
 import pigpio
 import time
+import datetime
 
 # define pins
-rgb1 = (0, 16, 21)
-rgb2 = (19, 13, 26)
+rgb1 = (20, 16, 21)
+rgb2 = (13, 26, 19)
 
 class LightStrip():
 	def __init__(self, pins = (20, 16, 21)):
@@ -14,8 +15,8 @@ class LightStrip():
 		# define colors
 		colors = {}
 		colors['red']		= (255, 0, 0)
-		colors['green']		= (0, 255, 30)
-		colors['blue']		= (0, 130, 255)
+		colors['green']		= (0, 255, 0)
+		colors['blue']		= (0, 0, 255)
 		colors['white']		= (255, 255, 255)
 
 		colors['black'] 	= (0, 0, 0)
@@ -34,7 +35,7 @@ class LightStrip():
 		self.pins = pins
 		self.currentColor = (255, 255, 255, 0)
 		self.setColor((255, 255, 255))
-	
+
 	def setColor(self, color = 'white', brightness = 255):
 		# get the rgb color value ex (255, 255, 0)
 		if type(color) == str:
@@ -51,11 +52,11 @@ class LightStrip():
 			level = int(rgb[i] * (brightness / 255))
 			self.pi.set_PWM_dutycycle(self.pins[i], level)
 
-		# save the current color
-		rgbNow = list(rgb)
-		rgbNow.append(brightness)
-		self.currentColor = tuple(rgbNow)
-	
+		# save the current color rgbNow = list(rgb) rgbNow.append(brightness)
+		rgb = list(rgb)
+		rgb.append(brightness)
+		self.currentColor = tuple(rgb)
+
 	def fadeColor(self, color = 'white', brightness = 255):
 		# get the rgb color value ex (255, 255, 0)
 		if type(color) == str:
@@ -97,14 +98,14 @@ def redAlert():
 	time.sleep(0.5)
 	for i in range(5):
 		print('beep')
-		strip1.setColor('orange') 
-		strip2.setColor('orange') 
+		strip1.setColor('orange')
+		strip2.setColor('orange')
 		time.sleep(1)
 		print('boop')
-		strip2.setColor('dorange') 
+		strip2.setColor('dorange')
 		time.sleep(.5)
 		print('boop')
-		strip1.setColor('dorange') 
+		strip1.setColor('dorange')
 		time.sleep(.4)
 
 def fadeColors(color):
@@ -135,11 +136,59 @@ def portalWakeUp():
 
 	time.sleep(70)
 	fadeColors('seagreen')
-	
+
 
 if __name__ == "__main__":
 	strip1 = LightStrip(rgb1)
 	strip2 = LightStrip(rgb2)
 
-	fadeColors('black')
+	while True:
+		fadeColors((255, 0, 0))
+		time.sleep(5)
+		fadeColors((0, 255, 0))
+		time.sleep(5)
+		fadeColors((0, 0, 255))
+		time.sleep(5)
+		fadeColors('white')
+		time.sleep(5)
+		fadeColors('black')
+		time.sleep(5)
 
+	"""
+	# test colors
+	fadeColors('red')
+	time.sleep(2)
+	fadeColors('green')
+	time.sleep(2)
+	fadeColors('blue')
+	time.sleep(2)
+	fadeColors('white')
+	time.sleep(5)
+
+	redAlert()
+	portalWakeUp()
+
+	last_color = 'white'
+
+	while True:
+		now_time = datetime.datetime.now().time()
+		if now_time >= datetime.time(7,5) and now_time < datetime.time(20,0):
+			if last_color != 'seagreen':
+				fadeColors('seagreen')
+				last_color = 'seagreen'
+
+		if now_time >= datetime.time(20,0) and now_time < datetime.time(22,50):
+			if last_color != 'dorange':
+				fadeColors('dorange')
+				last_color = 'dorange'
+
+		if now_time >= datetime.time(22,50) and now_time < datetime.time(23,0):
+			if last_color != 'red':
+				fadeColors('red')
+				last_color = 'red'
+
+		if now_time >= datetime.time(23,0) and now_time < datetime.time(23,10):
+			if last_color != 'black':
+				fadeColors('black')
+				last_color = 'black'
+	"""
